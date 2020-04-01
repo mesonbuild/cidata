@@ -83,8 +83,8 @@ main() {
   download_add msmpisdk.msi    https://download.microsoft.com/download/D/B/B/DBB64BA1-7B51-43DB-8BF1-D1FB45EACF7A/msmpisdk.msi
   download_add MSMpiSetup.exe  https://download.microsoft.com/download/D/B/B/DBB64BA1-7B51-43DB-8BF1-D1FB45EACF7A/MSMpiSetup.exe
   download_add LLVM.exe        https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/LLVM-10.0.0-win64.exe
-  download_add boost32.exe     https://sourceforge.net/projects/boost/files/boost-binaries/$boost_version/boost_$b_name-msvc-$boost_abi_tag-32.exe
-  download_add boost64.exe     https://sourceforge.net/projects/boost/files/boost-binaries/$boost_version/boost_$b_name-msvc-$boost_abi_tag-64.exe
+  #download_add boost32.exe     https://sourceforge.net/projects/boost/files/boost-binaries/$boost_version/boost_$b_name-msvc-$boost_abi_tag-32.exe
+  #download_add boost64.exe     https://sourceforge.net/projects/boost/files/boost-binaries/$boost_version/boost_$b_name-msvc-$boost_abi_tag-64.exe
 
   add win32/pkg-config.exe
   add win32/setdllcharacteristics.exe
@@ -97,7 +97,7 @@ main() {
   msg "Creating $OUT"
   old_pwd="$PWD"
   pushd $ARCHIVE_DIR  &> /dev/null
-  zip -9rq "$old_pwd/$OUT" * || die "Failed to create $OUT"
+  zip -rq "$old_pwd/$OUT" * || die "Failed to create $OUT"
   popd &> /dev/null
   msg "DONE"
 }

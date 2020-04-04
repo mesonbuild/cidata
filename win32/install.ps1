@@ -27,6 +27,8 @@ foreach ($p in "MSMPI_INC", "MSMPI_LIB32", "MSMPI_LIB64") {
 if ($Boost) {
   echo " - Using preinstalled boost version: $env:BOOST_ROOT"
 
+  $env:Path = "$env:BOOST_ROOT\lib;$env:Path"
+
   # if ($Arch -eq "x64") { $BoostBitness = "64" } else { $BoostBitness = "32" }
   # echo " - Installing $BoostBitness bit boost"
   # Start-Process $ScriptDir\boost$BoostBitness.exe -ArgumentList "/dir=$env:AGENT_WORKFOLDER\boost_@BOOST_FILENAME@ /silent" -Wait

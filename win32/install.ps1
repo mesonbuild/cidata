@@ -25,6 +25,8 @@ foreach ($p in "MSMPI_INC", "MSMPI_LIB32", "MSMPI_LIB64") {
 }
 
 if ($Boost) {
+  $env:BOOST_ROOT = $env:BOOST_ROOT_@BOOST_FILENAME@
+
   echo " - Using preinstalled boost version: $env:BOOST_ROOT"
 
   $env:Path = "$env:BOOST_ROOT\lib;$env:Path"

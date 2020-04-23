@@ -71,9 +71,15 @@ if ($Compiler -eq 'msvc2019') {
 ## hack to extract the environment from vcvarsall.bat
 Remove-Item env:BUILD_SOURCEVERSIONMESSAGE
 
+# arch for the vcvars script includes the host when cross-compiling
+$vcarch = $env:arch
+if ($env:arch -eq 'arm64') {
+  $vcarch = "amd64_arm64"
+}
+
 ## ask cmd.exe to output the environment table after the batch file completes
 $tempFile = [IO.Path]::GetTempFileName()
-cmd /c " `"$vcvars`" $env:arch && set > `"$tempFile`" "
+cmd /c " `"$vcvars`" $vcarch && set > `"$tempFile`" "
 
 ## go through the environment variables in the temp file.
 ## for each of them, set the variable in our local environment.

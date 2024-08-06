@@ -24,7 +24,7 @@ check_programs() {
   local i errors
   errors=0
   for i in "${REQUIRED[@]}"; do
-    which $i &> /dev/null || error "Missing program $i"
+    type -P $i &> /dev/null || error "Missing program $i"
   done
   exit_on_error
 }

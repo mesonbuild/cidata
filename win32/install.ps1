@@ -46,11 +46,12 @@ if ($DMD) {
   & dmd.exe --version
 
   if ($Arch -eq "x64") { $dmdArch = "x86_64" } else { $dmdArch = "x86_mscoff" }
-  & dub fetch urld
+  & dub fetch urld@3.0.0
   & dub build urld --compiler=dmd --arch=$dmdArch
-  & dub fetch dubtestproject
+  & dub fetch dubtestproject@1.2.0
   & dub build dubtestproject:test1 --compiler=dmd --arch=$dmdArch
   & dub build dubtestproject:test2 --compiler=dmd --arch=$dmdArch
+  & dub build dubtestproject:test3 --compiler=dmd --arch=$dmdArch
 }
 
 echo " - Importing the correct vcvarsall.bat"

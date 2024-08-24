@@ -40,12 +40,18 @@ if ($Boost) {
 
 if ($DMD) {
   echo " - Installing DMD"
-  $dmd_bin  = Join-Path $ScriptDir "dmd2\windows\bin"
+  if ($Arch -eq "x64") {
+    $dmd_bin = Join-Path $ScriptDir "dmd2\windows\bin64"
+    $dmdArch = "x86_64"
+  } else {
+    $dmd_bin = Join-Path $ScriptDir "dmd2\windows\bin"
+    $dmdArch = "x86"
+  }
   $env:Path = $env:Path + ";" + $dmd_bin
 
   & dmd.exe --version
 
-  if ($Arch -eq "x64") { $dmdArch = "x86_64" } else { $dmdArch = "x86_mscoff" }
+  # The --arch switch is required, see: https://github.com/dlang/dub/pull/2962
   & dub fetch urld@3.0.0
   & dub build urld --compiler=dmd --arch=$dmdArch
   & dub fetch dubtestproject@1.2.0
